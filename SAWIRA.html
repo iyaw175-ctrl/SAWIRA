@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="id"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SAWIRA</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#EDF0E6;--card:#fff;--ink:#16241A;--mute:#5B6B5F;--line:#D3DBC9;--g:#1F4D2E;--gl:#DCEBD9;--r:#B5321F;--rl:#F6DDD7;--on:#fff;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1A13;--card:#17261B;--ink:#E8EFE2;--mute:#9DB0A0;--line:#2A3D2F;--g:#7DBF8A;--gl:#1E3A27;--r:#E0644E;--rl:#3A211C;--on:#0F1A13;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0F1A13;--card:#17261B;--ink:#E8EFE2;--mute:#9DB0A0;--line:#2A3D2F;--g:#7DBF8A;--gl:#1E3A27;--r:#E0644E;--rl:#3A211C;--on:#0F1A13;color-scheme:dark}
+*{box-sizing:border-box}html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:400 16px/1.5 "Public Sans",system-ui,sans-serif;min-height:100%;padding-bottom:84px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
+h1,h2,h3{font-family:"Bricolage Grotesque","Public Sans",system-ui,sans-serif;margin:0;line-height:1.15}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--bg);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:12px 16px;max-width:600px;margin:0 auto}
+.logo{font:800 22px "Bricolage Grotesque",sans-serif;letter-spacing:.5px;color:var(--g);display:flex;gap:8px;align-items:center}
+.gr{width:14px;height:14px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#E9786A,var(--r) 60%);display:inline-block;flex:none}
+.pill{border:1.5px solid var(--r);color:var(--r);border-radius:99px;padding:4px 12px;font-weight:600;display:flex;gap:6px;align-items:center;background:transparent}
+main{max-width:600px;margin:0 auto;padding:16px}
+.p{display:none}.p.on{display:block}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px}
+.card h3{font-size:18px;margin-bottom:6px}
+.mute{color:var(--mute);font-size:14px}
+label{display:block;font-weight:600;font-size:14px;margin:12px 0 4px}
+select,input[type=number],textarea{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+button{font:600 16px "Public Sans",sans-serif;border:0;border-radius:10px;padding:12px 16px;cursor:pointer;background:var(--g);color:var(--on)}
+button.r{background:var(--r);color:#fff}button.o{background:transparent;color:var(--g);border:1.5px solid var(--g)}
+button:disabled{opacity:.5;cursor:default}.full{width:100%;margin-top:14px}
+:focus-visible{outline:3px solid var(--r);outline-offset:2px}
+.hero{background:var(--g);color:var(--on);border-radius:16px;padding:20px;margin-bottom:14px}
+.hero .n{font:800 56px/1 "Bricolage Grotesque",sans-serif}
+.dots{display:flex;flex-wrap:wrap;gap:5px;margin:12px 0}
+.dots i{width:14px;height:14px;border-radius:50%;background:rgba(255,255,255,.22)}
+.dots i.f{background:radial-gradient(circle at 35% 30%,#F29A8D,#C8412D 65%)}
+.hero button{background:var(--card);color:var(--g)}
+.tag{display:inline-block;border-radius:99px;padding:3px 12px;font-weight:600;font-size:14px}
+.ya{background:var(--gl);color:var(--g)}.sebagian{background:#F5E8C6;color:#6B4E00}.tidak{background:var(--rl);color:var(--r)}
+.dose{border-left:5px solid var(--r);background:var(--rl)}
+.dose .big{font:800 34px "Bricolage Grotesque",sans-serif;color:var(--r)}
+ul{padding-left:20px;margin:6px 0}
+#prev{width:100%;max-height:240px;object-fit:cover;border-radius:12px;margin-top:10px;display:none}
+.chat{display:flex;flex-direction:column;gap:10px;margin-bottom:12px}
+.m{max-width:88%;padding:10px 14px;border-radius:14px;white-space:pre-wrap}
+.m.u{align-self:flex-end;background:var(--g);color:var(--on)}.m.d{align-self:flex-start;background:var(--card);border:1px solid var(--line)}
+.row{display:flex;gap:8px}.row>*{flex:1}
+nav{position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:1px solid var(--line);display:flex;justify-content:center;padding-bottom:env(safe-area-inset-bottom,0px);z-index:9}
+nav div{display:flex;width:100%;max-width:600px}
+nav button{flex:1;background:none;color:var(--mute);border-radius:0;padding:12px 2px;font-size:11.5px;display:flex;flex-direction:column;align-items:center;gap:2px}
+nav button span{font-size:20px}nav button.on{color:var(--r)}
+#toast{position:fixed;left:50%;bottom:calc(90px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:99px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:20;font-size:14px;max-width:90%;text-align:center}
+#toast.s{opacity:1}.bar{height:12px;border-radius:6px;background:var(--r);margin:4px 0 10px}.bar.g{background:var(--g)}details{border-top:1px solid var(--line);padding:10px 0}summary{font-weight:600;cursor:pointer}.sc{font:800 44px/1 'Bricolage Grotesque',sans-serif;color:var(--g)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<header><div class="logo"><span class="gr"></span>SAWIRA</div><div class="pill" title="Koin kamu"><span class="gr"></span><b id="cn">0</b> koin</div></header>
+<main>
+
+<section class="p on" id="home">
+ <div class="hero">
+  <div class="mute" style="color:inherit;opacity:.85">Koin kamu</div>
+  <div class="n" id="big">0</div>
+  <div class="dots" id="dots"></div>
+  <div id="stk" style="margin-bottom:12px"></div>
+  <button id="ci" class="full" style="margin-top:0">Absen hari ini</button>
+ </div>
+ <div class="card" id="dash"></div>
+ <div class="card"><h3>Cara dapat dan pakai koin</h3>
+  <ul><li>Absen harian: +2 koin (bonus +5 tiap 7 hari berturut-turut)</li><li>Scan tanaman pertama hari ini: +3 koin</li><li>Catat pertumbuhan tanaman: +2 koin sekali sehari</li><li>Tukar 5 koin untuk 1 pertanyaan ke Halo Dok</li></ul></div>
+ <div class="card"><h3>Monitoring pertumbuhan</h3>
+  <p class="mute">Isi tinggi tanaman. Data ini membantu membuktikan hasil pemakaian SAWIRA di lahanmu.</p>
+  <label for="tg">Tinggi tanaman (cm)</label><input id="tg" type="number" min="0" inputmode="decimal">
+  <button class="o full" id="svg">Simpan catatan</button><div id="gl" style="margin-top:10px"></div></div>
+ <div class="card"><h3>Riwayat koin</h3><div id="lg" class="mute">Belum ada.</div></div>
+</section>
+
+<section class="p" id="scan">
+ <div class="card"><h3>Scan tanaman</h3>
+  <p class="mute">Foto daun atau tanaman, lalu lihat apakah SAWIRA cocok dan berapa dosisnya.</p>
+  <label for="pl">Jenis tanaman</label><select id="pl"></select>
+  <label for="jm" id="jml">Jumlah tanaman</label><input id="jm" type="number" min="1" value="100" inputmode="numeric">
+  <label for="ph">Foto tanaman</label><input id="ph" type="file" accept="image/*" capture="environment">
+  <img id="prev" alt="Pratinjau foto tanaman">
+  <button class="r full" id="go">Analisis dan hitung dosis</button>
+ </div>
+ <div id="res"></div>
+</section>
+
+<section class="p" id="dok">
+ <div class="card"><h3>Halo Dok</h3>
+  <p class="mute">Tanya soal pupuk dan tanamanmu. Tiap pertanyaan memakai 5 koin. Halo Dok juga asisten pertanian yang memakai profil lahan dari tab Lahan. Jawaban berupa saran awal, bukan pengganti penyuluh atau uji lab.</p></div>
+ <div class="chat" id="ch"></div>
+ <label for="q">Pertanyaanmu</label>
+ <textarea id="q" rows="3" placeholder="Contoh: Daun bibit sawit saya menguning, apakah SAWIRA bisa membantu?"></textarea>
+ <button class="r full" id="sd">Kirim (5 koin)</button>
+</section>
+
+<section class="p" id="lahan">
+ <div class="card"><h3>Profil lahan</h3><p class="mute">Isi kondisi lahanmu untuk indeks tanah, kebutuhan pupuk, jadwal, saran cuaca, dan simulasi.</p>
+  <label for="lp">Tanaman</label><select id="lp"></select>
+  <div class="row"><div><label for="lj">Jumlah</label><input id="lj" type="number" min="1" value="100"></div><div><label for="lh">pH tanah</label><input id="lh" type="number" step=".1" value="5"></div></div>
+  <div class="row"><div><label for="lc">Bahan organik</label><select id="lc"><option value="10">Rendah</option><option value="20" selected>Sedang</option><option value="30">Tinggi</option></select></div><div><label for="ld">Drainase</label><select id="ld"><option value="10">Sering tergenang</option><option value="20" selected>Cukup</option><option value="30">Baik</option></select></div></div>
+  <label for="lw">Cuaca 3 hari ke depan</label><select id="lw"><option value="0">Cerah atau berawan</option><option value="1">Hujan ringan</option><option value="2">Hujan lebat</option><option value="3">Kemarau panjang</option></select>
+  <label for="ls">Terakhir dipupuk (boleh kosong)</label><input id="ls" type="date">
+  <button class="r full" id="lg2">Analisis lahan</button></div>
+ <div id="lr"></div>
+</section>
+
+<section class="p" id="mitra">
+ <div class="card"><h3>Mitra penjualan</h3>
+  <p class="mute">Beli lewat koperasi, kios tani, atau pabrik mitra. Daftar di bawah masih contoh. Ganti dengan mitra yang benar-benar sudah dijajaki.</p>
+  <div class="row"><div><label for="vr">Kemasan</label><select id="vr"><option value="5">5 kg</option><option value="25" selected>25 kg (karung)</option><option value="50">50 kg</option></select></div>
+  <div><label for="qt">Jumlah</label><input id="qt" type="number" min="1" value="1"></div></div>
+  <div class="mute" id="hg" style="margin-top:8px"></div></div>
+ <div id="mt"></div>
+</section>
+<section class="p" id="kom">
+ <div class="card"><h3>Komunitas petani</h3><p class="mute">Bagikan pengalaman atau tanya sesama petani. Postingan baru tersimpan di perangkat ini. Agar terlihat semua pengguna, aplikasi perlu database bersama.</p>
+  <label for="pk">Topik</label><select id="pk"><option>Pengalaman</option><option>Pertanyaan</option><option>Tips</option></select>
+  <label for="pc">Isi</label><textarea id="pc" rows="3"></textarea><button class="r full" id="pp">Kirim</button></div>
+ <div id="pt"></div>
+ <div class="card"><h3>Edukasi dan panduan pupuk</h3><div id="ed"></div></div>
+</section>
+</main>
+
+<nav><div id="tabs">
+ <button data-t="home" class="on"><span>🪙</span>Beranda</button>
+ <button data-t="lahan"><span>🌱</span>Lahan</button>
+ <button data-t="scan"><span>📷</span>Scan</button>
+ <button data-t="dok"><span>🩺</span>Halo Dok</button>
+ <button data-t="mitra"><span>🤝</span>Mitra</button>
+ <button data-t="kom"><span>👥</span>Komunitas</button>
+</div></nav>
+<div id="toast" role="status"></div>
+
+<script>
+const $=s=>document.querySelector(s),K="sawira_v1",HARGA=4000;
+/* Dosis awal = rancangan uji, BUKAN hasil uji lapang. Ganti setelah data uji tim keluar. */
+const PL={
+ bibit:{n:"Bibit sawit (pembibitan)",u:"bibit",g:100,d:30,t:"per bibit"},
+ tbm:{n:"Sawit belum menghasilkan (TBM)",u:"pohon",g:1500,d:90,t:"per pohon"},
+ cabai:{n:"Cabai",u:"tanaman",g:40,d:14,t:"per tanaman"},
+ tomat:{n:"Tomat",u:"tanaman",g:50,d:14,t:"per tanaman"},
+ jagung:{n:"Jagung",u:"tanaman",g:30,d:21,t:"per tanaman"},
+ kangkung:{n:"Kangkung / sayur daun",u:"m²",g:100,d:30,t:"per m²"},
+ padi:{n:"Padi",u:"m²",g:40,d:30,t:"per m²"}};
+const MT=[["Koperasi Tani Sawit (contoh)","Koperasi/KUD","Pengiriman ke kebun anggota"],["Kios Tani Maju (contoh)","Kios tani","Ambil di kios atau antar"],["PKS Mitra Pilot (contoh)","Pabrik kelapa sawit","Pembelian langsung di lokasi produksi"],["Distributor Agri (contoh)","Distributor","Pesanan partai besar"]];
+let S={coins:5,streak:0,last:"",scan:"",grow:"",log:[],chat:[],gl:[],land:null,posts:[]};
+try{S={...S,...JSON.parse(localStorage.getItem(K)||"{}")}}catch(e){}
+const save=()=>{try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const day=(o=0)=>new Date(Date.now()-o*864e5).toISOString().slice(0,10);
+let tt;function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("s");clearTimeout(tt);tt=setTimeout(()=>t.classList.remove("s"),2600)}
+function add(n,why){S.coins+=n;S.log.unshift({t:day(),n,why});S.log=S.log.slice(0,15);save();paint()}
+function paint(){
+ $("#cn").textContent=S.coins;$("#big").textContent=S.coins;
+ $("#dots").innerHTML=Array.from({length:20},(_,i)=>`<i class="${i<S.coins?"f":""}"></i>`).join("");
+ $("#stk").textContent=S.streak?`Beruntun ${S.streak} hari`:"Belum ada absen beruntun";
+ $("#ci").disabled=S.last===day();$("#ci").textContent=S.last===day()?"Sudah absen hari ini":"Absen hari ini";
+ $("#svg").disabled=S.grow===day();chart();dash();
+ $("#lg").innerHTML=S.log.length?S.log.map(l=>`<div>${l.t}: ${l.n>0?"+":""}${l.n} koin, ${esc(l.why)}</div>`).join(""):"Belum ada.";
+ $("#ch").innerHTML=S.chat.length?S.chat.map(m=>`<div class="m ${m.r}">${esc(m.c)}</div>`).join(""):`<div class="m d">Halo, saya Halo Dok. Ceritakan tanamanmu dan apa yang kamu lihat.</div>`;
+}
+$("#ci").onclick=()=>{S.streak=S.last===day(1)?S.streak+1:1;S.last=day();add(2+(S.streak%7===0?5:0),"absen harian");toast("Absen tercatat")};
+$("#svg").onclick=()=>{const v=$("#tg").value;if(!v)return toast("Isi tinggi tanaman dulu");S.grow=day();S.gl.push({t:day(),h:+v});S.gl=S.gl.slice(-30);add(2,"catatan pertumbuhan "+v+" cm");};
+/* tab */
+document.querySelectorAll("#tabs button").forEach(b=>b.onclick=()=>{document.querySelectorAll("#tabs button,.p").forEach(e=>e.classList.remove("on"));b.classList.add("on");$("#"+b.dataset.t).classList.add("on");scrollTo(0,0)});
+/* sample (Claude) */
+let SM=null,IMG=false;
+(async()=>{try{if(window.claude){SM=await claude.use("sample");if(SM){try{IMG=!!(await SM.limits()).images}catch(e){}}}}catch(e){SM=null}})();
+function shrink(f){return new Promise(r=>{const i=new Image();i.onload=()=>{const k=Math.min(1,900/Math.max(i.width,i.height)),c=document.createElement("canvas");c.width=i.width*k;c.height=i.height*k;c.getContext("2d").drawImage(i,0,0,c.width,c.height);c.toBlob(r,"image/jpeg",.8)};i.onerror=()=>r(f);i.src=URL.createObjectURL(f)})}
+/* scan */
+$("#pl").innerHTML=Object.entries(PL).map(([k,v])=>`<option value="${k}">${v.n}</option>`).join("");
+const upd=()=>{$("#jml").textContent="Jumlah ("+PL[$("#pl").value].u+")"};$("#pl").onchange=upd;upd();
+$("#ph").onchange=e=>{const f=e.target.files[0],p=$("#prev");if(f){p.src=URL.createObjectURL(f);p.style.display="block"}};
+const rp=n=>"Rp"+Math.round(n).toLocaleString("id-ID");
+function doseCard(k,n,m=1){
+ const p=PL[k],tot=p.g*m*n,kg=tot/1000;
+ return `<div class="card dose"><h3>Dosis SAWIRA (estimasi awal)</h3>
+ <div class="big">${Math.round(p.g*m)} g <span style="font-size:16px;font-weight:600">${p.t}</span></div>
+ <p>Tabur tiap ${p.d} hari. Kurangi NPK menjadi sekitar 75% dari dosis anjuran biasa, jangan dihentikan.</p>
+ <p>Untuk ${n.toLocaleString("id-ID")} ${p.u}: <b>${kg.toLocaleString("id-ID",{maximumFractionDigits:1})} kg</b> sekali tabur, setara ${(kg/25).toLocaleString("id-ID",{maximumFractionDigits:1})} karung 25 kg, kira-kira ${rp(kg*HARGA)} pada harga target ${rp(HARGA)}/kg.</p>
+ <p class="mute">Angka ini rancangan awal tim dan belum divalidasi uji lapang. Ikuti dosis pada label produk setelah produk terdaftar.</p></div>`}
+$("#go").onclick=async()=>{
+ const k=$("#pl").value,n=Math.max(1,+$("#jm").value||1),f=$("#ph").files[0],R=$("#res");let h="";
+ $("#go").disabled=true;R.innerHTML=`<div class="card mute">Menganalisis...</div>`;
+ if(f&&SM&&IMG){
+  try{
+   const b=await shrink(f);
+   const pr=`Kamu agronom pendamping produk SAWIRA: pupuk organo-granul merah dari kompos TKKS, biochar cangkang sawit, dan abu janjang (N-P-K total sekitar 6-7%, hara dilepas lambat, memperbaiki tanah masam). SAWIRA menurunkan dosis pupuk kimia, bukan menggantikan urea. Lihat foto tanaman ${PL[k].n}. Balas HANYA JSON: {"kondisi":"...","gejala":["..."],"cocok":"ya|sebagian|tidak","alasan":"...","saran":["..."]}. Bahasa Indonesia sederhana, maksimal 3 gejala dan 3 saran. Jika foto tidak jelas atau bukan tanaman, cocok "sebagian" dan minta foto ulang. Ini perkiraan dari foto, jangan menjamin hasil.`;
+   const o=await SM(pr,{images:[b],cache:false}),m=(o.text||"").match(/\{[\s\S]*\}/),j=JSON.parse(m[0]);
+   const c=["ya","sebagian","tidak"].includes(j.cocok)?j.cocok:"sebagian",L={ya:"Cocok",sebagian:"Cocok sebagian",tidak:"Kurang cocok"}[c];
+   h=`<div class="card"><span class="tag ${c}">${L}</span><h3 style="margin-top:10px">${esc(j.kondisi||"")}</h3><p>${esc(j.alasan||"")}</p>
+   ${(j.gejala||[]).length?"<b>Yang terlihat</b><ul>"+j.gejala.map(x=>`<li>${esc(x)}</li>`).join("")+"</ul>":""}
+   ${(j.saran||[]).length?"<b>Saran</b><ul>"+j.saran.map(x=>`<li>${esc(x)}</li>`).join("")+"</ul>":""}
+   <p class="mute">Hasil dari foto adalah perkiraan. Untuk kasus serius, tanya Halo Dok atau penyuluh setempat.</p></div>`;
+  }catch(e){h=`<div class="card mute">Analisis foto belum berhasil (${esc(e.code||"coba lagi")}). Dosis tetap bisa dihitung di bawah.</div>`}
+ }else{
+  h=`<div class="card mute">${f?"Analisis foto belum tersedia di sini.":"Tanpa foto, aplikasi hanya menghitung dosis."} Tambahkan foto dan buka lewat tampilan Claude untuk analisis kondisi tanaman.</div>`;
+ }
+ R.innerHTML=h+doseCard(k,n);$("#go").disabled=false;
+ if(S.scan!==day()){S.scan=day();add(3,"scan tanaman");toast("+3 koin untuk scan hari ini")}
+};
+/* halo dok */
+$("#sd").onclick=async()=>{
+ const q=$("#q").value.trim();if(!q)return;
+ if(S.coins<5)return toast("Koin kurang. Absen atau scan dulu untuk dapat koin.");
+ if(!SM)return toast("Halo Dok hanya aktif di tampilan Claude");
+ add(-5,"tanya Halo Dok");S.chat.push({r:"u",c:q});S.chat=S.chat.slice(-12);$("#q").value="";paint();$("#sd").disabled=true;
+ const hist=S.chat.slice(0,-1).map(m=>(m.r==="u"?"Petani: ":"Halo Dok: ")+m.c).join("\n");
+ const pr=`Kamu "Halo Dok", agronom ramah di aplikasi SAWIRA. SAWIRA: pupuk organo-granul merah dari kompos TKKS (±73%), biochar cangkang sawit (±12%), abu janjang (±8%); N-P-K total perkiraan 6-7% (belum diuji lab), hara dilepas lambat, memperbaiki tanah masam. SAWIRA menurunkan dosis pupuk kimia (hipotesis: 75% NPK + SAWIRA), bukan pengganti urea. Jawab bahasa Indonesia sederhana, maksimal 120 kata, jujur tentang batas bukti, sarankan penyuluh atau uji tanah untuk kasus serius. Jangan menjanjikan hasil.\n\nRiwayat:\n${hist}\n\n${S.land?"Profil lahan petani: "+PL[S.land.k].n+", "+S.land.n+" "+PL[S.land.k].u+", pH "+S.land.ph+", indeks tanah "+S.land.score+"/100.\n\n":""}Pertanyaan baru: ${q}`;
+ try{const o=await SM(pr,{cache:false});S.chat.push({r:"d",c:o.text.trim()})}
+ catch(e){S.coins+=5;S.log.shift();S.chat.push({r:"d",c:"Maaf, jawaban gagal dimuat. Koinmu dikembalikan, coba lagi sebentar lagi."})}
+ save();paint();$("#sd").disabled=false;scrollTo(0,document.body.scrollHeight);
+};
+/* mitra */
+function mt(){
+ const v=+$("#vr").value,q=Math.max(1,+$("#qt").value||1),tot=v*q*HARGA;
+ $("#hg").textContent=`${q} x ${v} kg = ${v*q} kg, perkiraan ${rp(tot)} (harga target ${rp(HARGA)}/kg)`;
+ $("#mt").innerHTML=MT.map((m,i)=>{
+  const t=encodeURIComponent(`Halo ${m[0].replace(" (contoh)","")}, saya mau pesan pupuk SAWIRA ${q} x ${v} kg. Apakah stok tersedia dan berapa ongkos kirimnya?`);
+  return `<div class="card"><h3>${esc(m[0])}</h3><div class="mute">${esc(m[1])}</div><p>${esc(m[2])}</p><a href="https://wa.me/?text=${t}" target="_blank" rel="noopener"><button class="r full" style="margin-top:0">Pesan lewat WhatsApp</button></a></div>`}).join("")}
+$("#vr").onchange=mt;$("#qt").oninput=mt;mt();
+/* lahan */
+$("#lp").innerHTML=$("#pl").innerHTML;
+const addD=(s,n)=>{const d=new Date(s);d.setDate(d.getDate()+n);return d.toISOString().slice(0,10)};
+const fd=s=>new Date(s).toLocaleDateString("id-ID",{day:"numeric",month:"short",year:"numeric"});
+const WX=["Cerah atau berawan: waktu tabur baik. Tabur pagi atau sore, siram bila tanah kering.","Hujan ringan: waktu tabur paling baik karena butiran meresap pelan.","Hujan lebat: tunda tabur 3 hari. Hara mudah terbawa air dan butiran bisa hanyut.","Kemarau panjang: tabur hanya jika bisa menyiram. Tanpa air hara sulit terserap."];
+$("#lg2").onclick=()=>{
+ const k=$("#lp").value,n=Math.max(1,+$("#lj").value||1),ph=+$("#lh").value||5,om=+$("#lc").value,dr=+$("#ld").value,w=+$("#lw").value,p=PL[k];
+ const sc=Math.round(Math.max(0,40-Math.abs(ph-6)*12)+om+dr),lb=sc>=75?["ya","Sehat"]:sc>=50?["sebagian","Cukup"]:["tidak","Perlu perbaikan"],tip=[];
+ if(ph<5)tip.push("Tanah masam: biochar dan abu janjang di SAWIRA membantu menaikkan pH pelan-pelan.");
+ if(ph>7)tip.push("pH tinggi: abu janjang bersifat basa, jadi pantau pH dan jangan menambah dosis.");
+ if(om<=10)tip.push("Bahan organik rendah: SAWIRA dan kompos membantu memperbaikinya.");
+ if(dr<=10)tip.push("Drainase buruk: perbaiki parit sebelum memupuk.");
+ const m=sc<50?1.2:1,first=addD($("#ls").value||day(),p.d+(w===2?3:0)),ds=[0,1,2,3].map(i=>addD(first,i*p.d));
+ S.land={k,n,ph,score:sc,next:ds[0]};save();paint();
+ const sim=[["P0 Tanpa pupuk",55],["P1 NPK 100%",100],["P2 NPK 75% + SAWIRA",Math.min(110,Math.max(98,100+(60-sc)/8))],["P3 SAWIRA saja",Math.max(60,Math.min(95,80+(70-sc)/6))],["P4 Kompos TKKS + NPK 75%",92]];
+ $("#lr").innerHTML=`<div class="card"><h3>Indeks kesehatan tanah</h3><div style="display:flex;gap:12px;align-items:center"><div class="sc">${sc}</div><span class="tag ${lb[0]}">${lb[1]}</span></div><div class="bar g" style="width:${sc}%"></div>${tip.length?"<ul>"+tip.map(t=>`<li>${t}</li>`).join("")+"</ul>":""}<p class="mute">Skor perkiraan dari isianmu (pH, bahan organik, drainase), bukan hasil uji lab.${m>1?" Karena skor rendah, dosis dinaikkan 20%.":""}</p></div>`+doseCard(k,n,m)+`<div class="card"><h3>Jadwal pemupukan pintar</h3><ul>${ds.map((d,i)=>`<li>Tabur ke-${i+1}: ${fd(d)}</li>`).join("")}</ul><p><b>Saran cuaca:</b> ${WX[w]}</p><p class="mute">Cuaca diisi manual karena aplikasi belum terhubung data cuaca. Interval tabur ${p.d} hari mengikuti dosis awal.</p></div><div class="card"><h3>Simulasi efektivitas</h3>${sim.map(s=>`<div>${s[0]}: ${Math.round(s[1])}</div><div class="bar${s[0][1]==="2"?" g":""}" style="width:${Math.min(100,s[1]*.9)}%"></div>`).join("")}<p class="mute">Ilustrasi dari asumsi hipotesis tim (P1 = 100), bukan hasil uji. Ganti dengan data uji lapang setelah ada.</p></div>`};
+function chart(){const g=S.gl;$("#gl").innerHTML=g.length<2?`<div class="mute">${g.length?"Terakhir: "+g[0].h+" cm. ":""}Catat minimal 2 hari untuk melihat grafik.</div>`:(()=>{const mx=Math.max(...g.map(x=>x.h)),mn=Math.min(...g.map(x=>x.h)),r=mx-mn||1,P=g.map((x,i)=>[10+i*280/(g.length-1),90-(x.h-mn)/r*70]);return `<svg viewBox="0 0 300 100" width="100%" role="img" aria-label="Grafik tinggi tanaman"><polyline points="${P.join(" ")}" fill="none" stroke="var(--g)" stroke-width="3"/>${P.map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="4" fill="var(--r)"/>`).join("")}</svg><div class="mute">${g.length} catatan: ${g[0].h} cm sampai ${g[g.length-1].h} cm</div>`})()}
+function dash(){const L=S.land,g=S.gl;$("#dash").innerHTML="<h3>Dashboard pertanian</h3>"+(L?`<div class="row"><div><div class="mute">Tanaman</div><b>${PL[L.k].n}</b></div><div><div class="mute">Indeks tanah</div><b>${L.score}/100</b></div></div><div class="row" style="margin-top:10px"><div><div class="mute">Pemupukan berikutnya</div><b>${fd(L.next)}</b></div><div><div class="mute">Tinggi terakhir</div><b>${g.length?g[g.length-1].h+" cm":"-"}</b></div></div>`:`<p class="mute">Isi profil di tab Lahan untuk melihat ringkasan lahanmu di sini.</p>`)}
+/* edukasi dan komunitas */
+const ED=[["Kenapa SAWIRA berwarna merah?","Merah membuat petani mudah membedakannya dari urea putih, membantu mencegah pemalsuan, dan menandai area yang sudah ditabur. Pewarna harus lolos uji logam berat."],["Apakah SAWIRA pengganti urea?","Bukan. Urea mengandung 46% N, jauh lebih tinggi. SAWIRA dirancang menurunkan dosis pupuk kimia dan memperbaiki tanah. Hipotesis yang diuji: SAWIRA + 75% NPK setara 100% NPK."],["Apa isi SAWIRA?","Kompos tandan kosong (basis organik dan nitrogen), biochar cangkang sawit (hara lepas lambat, memperbaiki tanah masam), abu janjang (kalium), serta binder tapioka dan molase."],["Cara menabur","Tabur melingkar di sekitar tanaman, jangan menempel batang. Hindari tanah tergenang dan hujan lebat. Dosis akhir mengikuti label setelah produk terdaftar."]];
+$("#ed").innerHTML=ED.map(e=>`<details><summary>${e[0]}</summary><p>${e[1]}</p></details>`).join("");
+function pst(){$("#pt").innerHTML=S.posts.length?S.posts.map(p=>`<div class="card"><span class="tag ya">${esc(p.k)}</span> <span class="mute">${p.t}</span><p>${esc(p.c)}</p></div>`).join(""):`<p class="mute">Belum ada postingan. Jadilah yang pertama berbagi.</p>`}
+$("#pp").onclick=()=>{const c=$("#pc").value.trim();if(!c)return;S.posts.unshift({k:$("#pk").value,t:day(),c});S.posts=S.posts.slice(0,30);$("#pc").value="";save();pst();toast("Terkirim")};
+pst();
+paint();
+</script></body></html>
